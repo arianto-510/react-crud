@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 const User = () => {
@@ -14,9 +15,21 @@ const User = () => {
         const response = await axios.get(url)
         setUser(response.data)
     }
+
+    const deleteUser = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/users/${id}`)
+            getUser()
+        }catch(err){
+            console.log(err)
+        }
+    }
   return (
     <div>
         <h2>User</h2>
+        <button><Link to={'add'}>Add Users</Link></button>
+        <br />
+        {/* <br /> */}
         <table border={1} cellPadding={10} cellSpacing={0}>
             <tr>
                 <th>Id</th>
@@ -32,8 +45,8 @@ const User = () => {
                 <td>{users.email}</td>
                 <td>{users.gender}</td>
                 <th>
-                    <button>Delete</button>
-                    <button>Edit</button>
+                    <button onClick={() => deleteUser(users.id)}>Delete</button>
+                    <button><a href={`/edit/${users.id}`}>Edit</a></button>
                 </th>
             </tr>
             ))}

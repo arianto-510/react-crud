@@ -1,4 +1,5 @@
 import AddUser from "./component/AddUser";
+import EditUser from "./component/EditUser"
 import User from "./component/User";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<User/>}/>
         <Route path="add" element={<AddUser/>}/>
+        <Route path="edit/:id" element={<EditUser/>}/>
       </Routes>
       </BrowserRouter>
       
